@@ -12,19 +12,22 @@
 </head>
 <body> 
 
-    <div class='row container'>
-        <div class='col col-sm-12 stack card'>
+    <div class='row'>
+        <div class='col-lg-6 stack card'>
             <h3 class='text-center'>Stack Structure</h3>
             <div class='row'>
-                <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="col-sm-12 col-md-6 col-lg-6 ">
                     <!--<div>{{stack}}</div>-->
-                    <div>
-                        <input type='text' v-model='push_stack' />
-                        <button class='btn btn-success' @click='pushToStack'>Push</button>
-                    </div>
-                    <div>
-                        <input type='text' v-model='pop_stack' disabled/>
-                        <button class='btn btn-danger' @click='popToStack'>&nbsp;Pop&nbsp;</button>
+                    <div class='container'>
+                        <div>
+                            <input type='text' v-model='push_stack' />
+                            <button class='btn btn-success' @click='pushToStack'>Push</button>
+                        </div>
+                        <div>
+                            <input type='text' v-model='pop_stack' disabled/>
+                            <button class='btn btn-danger' @click='popToStack'>&nbsp;Pop&nbsp;</button>
+                           
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6">            
@@ -35,13 +38,36 @@
                     </div>
                 </div>
             </div>
+            <br/>
         </div>
-        <div class='col col-sm-12 queue card'>
-
+        <div class='col-lg-6 queue card'>
+            <h3 class='text-center'>Queue Structure</h3>
+            <div class='row'>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <!--<div>{{stack}}</div>-->
+                    <div>
+                        <input type='text' v-model='enqueue' />
+                        <button class='btn btn-success' @click='enqueueQ'>Enqueue</button>
+                    </div>
+                    <div>
+                        <input type='text' v-model='dequeue' disabled/>
+                        <button class='btn btn-danger' @click='dequeueQ'>Dequeue</button>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">            
+                    <div class='container'>
+                        <ul class="list-group w-50 ">
+                            <li v-for="value in this.queue.getAll()" class="list-group-item text-center">{{value}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br/>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="stack.js"></script>
+    <script src="queue.js"></script>
     <script>
 
         Vue.component("StackHTML", {
@@ -53,8 +79,7 @@
             data: {
                 stack : new Stack(),
                 push_stack : "",
-                pop_stack: "",
-                get_all: []
+                pop_stack: ""
             },
             methods: {
                 pushToStack() {
@@ -75,6 +100,29 @@
                     } else{
                         this.pop_stack = temp;
                     }                    
+                }
+            }
+        })
+
+        var queueApp = new Vue({
+            el: ".queue",
+            data: {
+                queue: new Queue(),
+                enqueue: "",
+                dequeue: ""
+            },
+            methods : {
+                enqueueQ() {
+                    if(this.enqueue) {
+                        this.queue.enqueue(this.enqueue);
+                        this.enqueue = "";
+                    } else {
+                        alert("Add element to Queue");
+                    }
+                },
+                dequeueQ() {
+                    this.dequeue = this.queue.dequeue();
+                    
                 }
             }
         })
