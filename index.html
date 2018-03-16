@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data Structure</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    
+    
+</head>
+<body> 
+
+    <div class='row container'>
+        <div class='col col-sm-12 stack card'>
+            <h3 class='text-center'>Stack Structure</h3>
+            <div class='row'>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <!--<div>{{stack}}</div>-->
+                    <div>
+                        <input type='text' v-model='push_stack' />
+                        <button class='btn btn-success' @click='pushToStack'>Push</button>
+                    </div>
+                    <div>
+                        <input type='text' v-model='pop_stack' disabled/>
+                        <button class='btn btn-danger' @click='popToStack'>&nbsp;Pop&nbsp;</button>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">            
+                    <div class='container'>
+                        <ul class="list-group w-50 ">
+                            <li v-for="value in this.stack.getAll()" class="list-group-item text-center">{{value}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='col col-sm-12 queue card'>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="stack.js"></script>
+    <script>
+
+        Vue.component("StackHTML", {
+            template: "<div style='border:1px solid grey'>{{data}}</div>",
+            props: ["data"]
+        })
+        var app = new Vue({
+            el: ".stack",
+            data: {
+                stack : new Stack(),
+                push_stack : "",
+                pop_stack: "",
+                get_all: []
+            },
+            methods: {
+                pushToStack() {
+                    if(this.push_stack) {
+                        //alert(this.push_stack + " was add");
+                        this.stack.push(this.push_stack);
+                        this.push_stack = "";
+                    } else {
+                        alert("Set an element to add");
+                    }
+                    
+                },
+                popToStack() {
+                    var temp = this.stack.pop();
+                    if(!temp) {
+                        alert("Nothing to pop");
+                        this.pop_stack = "";
+                    } else{
+                        this.pop_stack = temp;
+                    }                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>
