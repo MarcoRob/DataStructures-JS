@@ -41,6 +41,7 @@ Queue.prototype.dequeue = function() {
             this.tail = null;
         }
         this.count--;
+        return current.data;
     }
 }
 

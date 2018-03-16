@@ -3,11 +3,11 @@ DataStructures writed in Javascript
 
 Project to focus in the representation of data structures writed in Javascript
 
-> *Tools*
+> **Tools**
 > - VueJs
 > - Bootstrap
 
-> *Data Structures*
+> **Data Structures**
 > - Stack
 > - Queue
 
